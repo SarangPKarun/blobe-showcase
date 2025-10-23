@@ -2,13 +2,11 @@ import * as THREE from "three";
 import getLayer from "./libs/getLayer.js";
 import getStarfield from "./libs/getStarfield.js";
 import loadGlobe from "./libs/loadGlobe.js";
-// import { OBJLoader } from "jsm/loaders/OBJLoader.js";
-
 
 const w = window.innerWidth;
 const h = window.innerHeight;
-
 const scene = new THREE.Scene();
+
 const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
 camera.position.z = 5;
 
@@ -18,48 +16,62 @@ renderer.setSize(w, h);
 
 let scrollPosY = 0;
 let globe;
+let stars;
+let gradientBackground;
 
 // ===================================================
-// Initialize Scene
+// 1️⃣ Loading Manager
+// ===================================================
+const loadingManager = new THREE.LoadingManager();
+
+// Called when *all* resources (textures, models) are loaded
+loadingManager.onLoad = () => {
+  console.log("✅ All assets loaded!");
+  const loaderScreen = document.getElementById("loading-screen");
+  loaderScreen.classList.add("fade-out");
+  initScene(); // only start animation after all loaded
+};
+
+// Optional — log progress
+loadingManager.onProgress = (url, loaded, total) => {
+  console.log(`Loading ${url} (${loaded}/${total})`);
+};
+
+// ===================================================
+// 2️⃣ Load All Assets Using the Manager
+// ===================================================
+const textureLoader = new THREE.TextureLoader(loadingManager);
+const earthTexture = textureLoader.load("./assets/globe_texture.jpeg");
+
+loadGlobe("./assets/globe.glb", (loadedGlobe) => {
+  globe = loadedGlobe;
+  globe.material.map = earthTexture;
+  globe.material.needsUpdate = true;
+  scene.add(globe);
+}, loadingManager); // 👈 pass manager to loadGlobe
+
+
+// Load background elements (can be created instantly)
+gradientBackground = getLayer({
+  hue: 0.6,
+  numSprites: 8,
+  opacity: 0.2,
+  radius: 10,
+  size: 24,
+  z: -10.5,
+});
+scene.add(gradientBackground);
+
+stars = getStarfield({ numStars: 4500 });
+scene.add(stars);
+
+// ===================================================
+// 3️⃣ Initialize Scene AFTER all assets loaded
 // ===================================================
 function initScene() {
-  // 🌍 Load the Globe Model
-  loadGlobe("./assets/globe.glb", (loadedGlobe) => {
-    globe = loadedGlobe;
-
-    // ✅ Force custom texture
-    globe.material.map = new THREE.TextureLoader().load("./assets/globe_texture.jpeg");
-    globe.material.needsUpdate = true;
-
-    // Initial position
-    globe.position.set(0, -0.5, 0);
-    globe.userData.rotationSpeed = 0.002;
-
-    scene.add(globe);
-  });
-
-  // 💡 Lights
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
   scene.add(hemiLight);
 
-  // 🌈 Gradient Background
-  const gradientBackground = getLayer({
-    hue: 0.6,
-    numSprites: 8,
-    opacity: 0.2,
-    radius: 10,
-    size: 24,
-    z: -10.5,
-  });
-  scene.add(gradientBackground);
-
-  // 🌟 Starfield
-  const stars = getStarfield({ numStars: 4500 });
-  scene.add(stars);
-
-  // ===================================================
-  // Animation Loop
-  // ===================================================
   let goalPos = 0;
   const rate = 0.1;
 
@@ -68,16 +80,12 @@ function initScene() {
 
     goalPos = Math.PI * scrollPosY;
 
-    // 🌍 Animate globe rotation + scroll movement
     if (globe) {
-      globe.rotation.y -= (globe.rotation.y - (goalPos * 1.0)) * rate;
-      // globe.rotation.y += globe.userData.rotationSpeed || 0.002;
-
-      // const targetY = -0.5 + scrollPosY * 2.0;
-      // const targetZ = 0 - scrollPosY * 1.5;
-
-      // globe.position.y -= (globe.position.y - targetY) * rate;
-      // globe.position.z -= (globe.position.z - targetZ) * rate;
+      globe.rotation.y += globe.userData.rotationSpeed || 0.002;
+      const targetY = -0.5 + scrollPosY * 2.0;
+      const targetZ = 0 - scrollPosY * 1.5;
+      globe.position.y -= (globe.position.y - targetY) * rate;
+      globe.position.z -= (globe.position.z - targetZ) * rate;
     }
 
     stars.position.z -= (stars.position.z - goalPos * 8) * rate;
@@ -87,12 +95,7 @@ function initScene() {
 }
 
 // ===================================================
-// Start Scene
-// ===================================================
-initScene();
-
-// ===================================================
-// Scroll & Resize Events
+// 4️⃣ Scroll + Resize Events
 // ===================================================
 window.addEventListener("scroll", () => {
   scrollPosY = window.scrollY / document.body.clientHeight;
