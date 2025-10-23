@@ -42,6 +42,7 @@ loadingManager.onProgress = (url, loaded, total) => {
 // ===================================================
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const earthTexture = textureLoader.load("./assets/globe_texture.jpeg");
+earthTexture.flipY = false;
 
 loadGlobe("./assets/globe.glb", (loadedGlobe) => {
   globe = loadedGlobe;
@@ -81,11 +82,13 @@ function initScene() {
     goalPos = Math.PI * scrollPosY;
 
     if (globe) {
-      globe.rotation.y += globe.userData.rotationSpeed || 0.002;
-      const targetY = -0.5 + scrollPosY * 2.0;
-      const targetZ = 0 - scrollPosY * 1.5;
-      globe.position.y -= (globe.position.y - targetY) * rate;
-      globe.position.z -= (globe.position.z - targetZ) * rate;
+      // globe.rotation.y += globe.userData.rotationSpeed || 0.002;
+      globe.rotation.y -= (globe.rotation.y - (goalPos * 1.0)) * rate;
+
+      // const targetY = -0.5 + scrollPosY * 2.0;
+      // const targetZ = 0 - scrollPosY * 1.5;
+      // globe.position.y -= (globe.position.y - targetY) * rate;
+      // globe.position.z -= (globe.position.z - targetZ) * rate;
     }
 
     stars.position.z -= (stars.position.z - goalPos * 8) * rate;

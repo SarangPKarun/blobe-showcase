@@ -16,11 +16,19 @@ export default function loadGlobe(path, onLoad, manager = null) {
             roughness: 0.6,
             metalness: 0.1,
           });
+
+          globe.castShadow = true;
+          globe.recieveShadow = true;
+          globe.rotation.order = "YXZ";
+          globe.rotation.set(-Math.PI / 2, Math.PI, 0);
+
+
         }
       });
       if (globe) {
         globe.position.set(0, -0.5, 0);
-        globe.userData.rotationSpeed = 0.002;
+        globe.scale.set(1.2,1.2,1.2);
+        globe.userData.rotationSpeed = 0.007;
         onLoad(globe);
       }
     },

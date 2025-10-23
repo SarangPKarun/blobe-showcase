@@ -27,7 +27,7 @@ nav {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
     color: #fff;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .hamburger {
@@ -43,27 +43,50 @@ nav {
     margin: 4px 0;
 }
 
+/* Loading screen */
+/* Full-screen loader overlay */
 #loading-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, #0a0a0f, #000);
-  color: white;
+  background: radial-gradient(circle at center, #0a0a0f, #000); /* Dark centered gradient */
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: monospace;
   font-size: 1.2rem;
-  z-index: 999;
+  color: white;
+  z-index: 9999;
+  flex-direction: column; /* Stack image + optional text */
+  transition: opacity 1s ease;
 }
+
+/* Fade out animation */
 #loading-screen.fade-out {
   opacity: 0;
-  transition: opacity 1s ease;
   pointer-events: none;
 }
 
+/* Loader image */
+#loading-screen .loader-text img {
+  width: 80px;   
+  object-fit: contain;
+  margin-bottom: 10px;    /* Space for optional text */
+}
+
+
+/* Optional text under loader */
+#loading-screen .loader-text span {
+  margin-top: 10px;
+  display: block;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+
+/* Home */
 
 #container {
     display: flex;
