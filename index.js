@@ -13,6 +13,8 @@ camera.position.z = 5;
 const canvas = document.getElementById("three-canvas");
 const renderer = new THREE.WebGLRenderer({ antialias: true, canvas });
 renderer.setSize(w, h);
+renderer.setPixelRatio(window.devicePixelRatio);
+renderer.setClearColor(0x000000, 1);
 
 let scrollPosY = 0;
 let globe;

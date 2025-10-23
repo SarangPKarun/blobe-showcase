@@ -17,6 +17,12 @@
   <body>
      <nav>
       <div class="logo">blobe</div>
+      <ul class="nav-links">
+        <li><a href="#container">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#download">Download</a></li>
+      </ul>
       <div class="hamburger">
         <div></div>
         <div></div>
@@ -39,7 +45,7 @@
       </div>
 
       <!-- Feature 1: Advanced Texture Handling -->
-      <div class="content-panel">
+      <div class="content-panel" id="about">
         <h2>About Blobe App</h2>
         <p>Blobe is an innovative web application designed to provide users
               with a unique experience in managing and interacting with data
@@ -95,14 +101,14 @@
       </div>
 
       <!-- Feature 4: Geometry Instancing -->
-      <div class="content-panel">
+      <div class="content-panel" id="contact">
         <h2>Geometry Instancing</h2>
         <p>Lets you render many instances more efficiently.</p>
         <p>Reduces the overhead and is useful in rendering large numbers of objects, like vegetation, particles, or crowds.</p>
       </div>
 
       <!-- Feature 5: Uniform Buffer Objects (UBOs) -->
-      <div class="content-panel">
+      <div class="content-panel" id="download">
         <h2>Uniform Buffer Objects (UBOs)</h2>
         <p>Allow data sharing between multiple shaders.</p>
         <p>More efficient management of global variables</p>

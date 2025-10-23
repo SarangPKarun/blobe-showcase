@@ -1,21 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab:wght@400;700&display=swap');
 
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     --gap: 40em;
     margin: 0;
+    padding: 0;
     font-family: 'Roboto Slab', serif;
     color: #fff;
-    background: linear-gradient(180deg, #0f578e, #8b1407);
+    background-color: #000;
+    /* background: linear-gradient(180deg, #0f578e, #8b1407);   */
 }
+
 nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(10px);
-    padding: 1em;
+    padding: 0.8em 2em;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,15 +29,40 @@ nav {
     box-sizing: border-box;
 }
 
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2em;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-links li a:hover {
+    color: #ff9900; /* highlight color on hover */
+    transform: scale(1.05);
+}
+
 .logo {
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
     color: #fff;
+    font-weight: 700;
+    padding: 5px;
+    border: solid #ff9900;
     /* text-transform: uppercase; */
 }
 
 .hamburger {
-    display: flex;
+    display: none;
     flex-direction: column;
     cursor: pointer;
 }
@@ -41,6 +72,30 @@ nav {
     height: 3px;
     background-color: #fff;
     margin: 4px 0;
+    border-radius: 2px;
+}
+
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        flex-direction: column;
+        width: 200px;
+        text-align: center;
+        padding: 1em 0;
+        gap: 1em;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 }
 
 /* Loading screen */
@@ -96,10 +151,13 @@ nav {
 }
 
 #three-canvas {
+    display: block;
     z-index: -1;
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .content-panel, .hero-panel {
