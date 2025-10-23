@@ -13,3 +13,8 @@ mobileMenu.querySelectorAll('a').forEach(link => {
     hamburger.classList.remove('active'); // revert to hamburger
   });
 });
+
+
+window.onload = function() {
+  window.scrollTo(0, 0); // Always go to top
+};
