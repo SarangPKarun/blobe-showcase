@@ -187,8 +187,9 @@ nav {
 /* Home */
 
 #container {
+    margin-left: 200px;
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     flex-wrap: wrap;
     padding-top: 5em;
 }
@@ -208,7 +209,7 @@ nav {
 .content-panel, .hero-panel {
     width: 80%;
     border-radius: 10px;
-    padding: 2em;
+    padding: 2em 2em 2em 0;
     margin-bottom: var(--gap);
 }
 
@@ -259,6 +260,11 @@ a {
 
 
 @media screen and (max-width: 1200px) and (min-width: 769px) {
+    #container {
+        margin-left: 140px;
+
+    }
+
     .hero-panel h1 {
         font-size: 7em; /* Between desktop (10em) and mobile (5em) */
     }
@@ -278,13 +284,17 @@ a {
 
     .content-panel, .hero-panel {
         width: 85%; /* Slightly narrower for spacing */
-        padding: 3em;
+        padding: 3em 3em 3em 0;
     }
 
 }
 
 /* Hamburger visible only on mobile */
 @media screen and (max-width: 768px) {
+    #container {
+        margin-left: 30px;
+    }
+
     .nav-links {
     display: none;
     }
@@ -320,7 +330,7 @@ a {
 
     .content-panel, .hero-panel {
         width: 90%; /* Use more of the screen width */
-        padding: 4em; /* Reduce padding */
+        padding: 4em 4em 4em 0; /* Reduce padding */
         margin-bottom: var(--gap);
     }
 
