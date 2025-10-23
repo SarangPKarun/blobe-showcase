@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Slab:wght@400;700&display=swap');
 
+* {
+  box-sizing: border-box;
+}
+
+
 html {
     scroll-behavior: smooth;
 }
@@ -14,6 +19,12 @@ body {
     background-color: #000;
     /* background: linear-gradient(180deg, #0f578e, #8b1407);   */
 }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
 
 nav {
     position: fixed;
@@ -190,6 +201,8 @@ nav {
     left: 0;
     width: 100%;
     height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
 }
 
 .content-panel, .hero-panel {
