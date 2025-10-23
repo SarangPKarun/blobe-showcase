@@ -209,12 +209,13 @@ nav {
 .content-panel, .hero-panel {
     width: 80%;
     border-radius: 10px;
-    padding: 2em 2em 2em 0;
+    padding: 5em 2em 2em 0;
     margin-bottom: var(--gap);
 }
 
 .content-panel {
     height: auto;
+    margin-top: 10em;
 }
 
 .hero-panel {
@@ -258,6 +259,10 @@ a {
     margin-bottom: 5em;
 }
 
+.hero-panel#footer h1{
+        font-size: 6em; /* Drastically reduce from 10em */
+    }
+
 
 @media screen and (max-width: 1200px) and (min-width: 769px) {
     #container {
@@ -284,7 +289,11 @@ a {
 
     .content-panel, .hero-panel {
         width: 85%; /* Slightly narrower for spacing */
-        padding: 3em 3em 3em 0;
+        padding: 4em 3em 3em 0;
+    }
+
+    .hero-panel#footer h1{
+        font-size: 4em; /* Drastically reduce from 10em */
     }
 
 }
@@ -330,11 +339,16 @@ a {
 
     .content-panel, .hero-panel {
         width: 90%; /* Use more of the screen width */
-        padding: 4em 4em 4em 0; /* Reduce padding */
+        padding: 5em 4em 4em 0; /* Reduce padding */
         margin-bottom: var(--gap);
     }
+    
 
     .hero-panel#footer {
         margin-bottom: 3em;
+    }
+
+    .hero-panel#footer h1{
+        font-size: 2em; /* Drastically reduce from 10em */
     }
 }
