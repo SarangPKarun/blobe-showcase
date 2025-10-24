@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
+
+    <canvas id="three-canvas"></canvas>
      <nav>
       <div class="logo"><img src="/assets/logo-heading.png" alt="blobe"></div>
       <ul class="nav-links">
@@ -52,13 +54,11 @@
         <div class="loader-text"><img src="./assets/loading-screen.gif" alt="Loading ..."></div>
       </div>
 
-      <canvas id="three-canvas"></canvas>
-      <canvas id="globe-canvas"></canvas>
 
 
       <!-- Hero Section -->
       <div class="hero-panel">
-        <h1>Blobe: <div class="h1-sub">Connect Globally</div></h1>
+        <h1>Blobe: <div class="h1-sub above">Connect Globally</div></h1>
         <p>
           A revolutionary social media platform built around a 3D interactive globe — where real people share real stories, events, and updates tied to their locations.
         </p>
@@ -66,6 +66,7 @@
           Explore what’s happening anywhere in the world — from breaking news to cultural events — all visualized beautifully on Blobe’s dynamic, living planet.
         </p>
       </div>
+
 
       <!-- Feature 1: Advanced Texture Handling -->
       <div class="content-panel" id="about">
@@ -157,7 +158,10 @@
         </p>
       </div>
     </div>
-    <!-- <script type="module" src="globe.js"></script> -->
+
+    <canvas id="globe-canvas"></canvas>
+
+    <script type="module" src="globe.js"></script>
     <script type="module" src="background.js"></script>
 
     <script type="module" src="index.js"></script>

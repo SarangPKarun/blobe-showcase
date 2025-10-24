@@ -215,7 +215,7 @@ nav {
 
 #globe-canvas {
     display: block;
-    z-index: 1000;
+    z-index: 500;
     position: fixed;
     top: 0;
     left: 0;
@@ -239,6 +239,7 @@ nav {
 
 .hero-panel {
     height: auto;
+    z-index: 1001;
 }
 
 .hero-panel h1 {
@@ -246,6 +247,7 @@ nav {
     font-size: 8em;
     margin-bottom: 0.5em;
 }
+
 
 .hero-panel h1 .h1-sub{
     font-family: 'Montserrat', sans-serif;
