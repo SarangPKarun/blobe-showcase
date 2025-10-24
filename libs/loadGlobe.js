@@ -26,7 +26,7 @@ export default function loadGlobe(path, onLoad, manager = null) {
         }
       });
       if (globe) {
-        globe.position.set(0, -0.5, 0);
+        globe.position.set(0, 0, 0);
         globe.scale.set(1.2,1.2,1.2);
         globe.userData.rotationSpeed = 0.007;
         onLoad(globe);

@@ -22,7 +22,7 @@ let stars;
 let gradientBackground;
 
 // ===================================================
-// 1️⃣ Loading Manager
+// Loading Manager
 // ===================================================
 const loadingManager = new THREE.LoadingManager();
 
@@ -40,7 +40,7 @@ loadingManager.onProgress = (url, loaded, total) => {
 };
 
 // ===================================================
-// 2️⃣ Load All Assets Using the Manager
+// Load All Assets Using the Manager
 // ===================================================
 const textureLoader = new THREE.TextureLoader(loadingManager);
 const earthTexture = textureLoader.load("./assets/globe_texture.jpeg");
@@ -69,7 +69,7 @@ stars = getStarfield({ numStars: 4500 });
 scene.add(stars);
 
 // ===================================================
-// 3️⃣ Initialize Scene AFTER all assets loaded
+// Initialize Scene AFTER all assets loaded
 // ===================================================
 function initScene() {
   const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
@@ -85,7 +85,7 @@ function initScene() {
 
     if (globe) {
       // globe.rotation.y += globe.userData.rotationSpeed || 0.002;
-      globe.rotation.y -= (globe.rotation.y - (goalPos * 1.0)) * rate;
+      globe.rotation.y -= (globe.rotation.y - (goalPos * 2.0)) * rate;
 
       // const targetY = -0.5 + scrollPosY * 2.0;
       // const targetZ = 0 - scrollPosY * 1.5;
@@ -93,14 +93,14 @@ function initScene() {
       // globe.position.z -= (globe.position.z - targetZ) * rate;
     }
 
-    stars.position.z -= (stars.position.z - goalPos * 8) * rate;
+    stars.position.z -= (stars.position.z - goalPos * 10) * rate;
     renderer.render(scene, camera);
   }
   animate();
 }
 
 // ===================================================
-// 4️⃣ Scroll + Resize Events
+// Scroll + Resize Events
 // ===================================================
 window.addEventListener("scroll", () => {
   scrollPosY = window.scrollY / document.body.clientHeight;

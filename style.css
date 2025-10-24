@@ -63,13 +63,20 @@ nav {
 }
 
 .logo {
+    display: flex;
     font-family: 'Montserrat', sans-serif;
     font-size: 1.5em;
     color: #fff;
     font-weight: 700;
     padding: 5px;
-    border: solid #ff9900;
+    /* border: solid #ff9900; */
     /* text-transform: uppercase; */
+    /* background-color: white; */
+    align-items: center;
+}
+
+.logo img{
+    width: 150px;
 }
 
 .hamburger {
@@ -302,6 +309,7 @@ a {
 @media screen and (max-width: 768px) {
     #container {
         margin-left: 30px;
+        padding-top: 2em;
     }
 
     .nav-links {
@@ -339,7 +347,7 @@ a {
 
     .content-panel, .hero-panel {
         width: 90%; /* Use more of the screen width */
-        padding: 5em 4em 4em 0; /* Reduce padding */
+        padding: 5em 2em 4em 0; /* Reduce padding */
         margin-bottom: var(--gap);
     }
     
