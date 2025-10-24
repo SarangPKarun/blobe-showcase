@@ -193,7 +193,7 @@ nav {
 
 /* Home */
 
-#container {
+.container {
     margin-left: 200px;
     display: flex;
     /* justify-content: center; */
@@ -204,6 +204,18 @@ nav {
 #three-canvas {
     display: block;
     z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+#globe-canvas {
+    display: block;
+    z-index: 1000;
     position: fixed;
     top: 0;
     left: 0;
@@ -272,7 +284,7 @@ a {
 
 
 @media screen and (max-width: 1200px) and (min-width: 769px) {
-    #container {
+    .container {
         margin-left: 140px;
 
     }
@@ -307,7 +319,7 @@ a {
 
 /* Hamburger visible only on mobile */
 @media screen and (max-width: 768px) {
-    #container {
+    .container {
         margin-left: 30px;
         padding-top: 2em;
     }
