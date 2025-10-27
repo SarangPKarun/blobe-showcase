@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import loadGlobe from "./libs/loadGlobe.js";
+import { createBanner, enableBannerHoverZoom } from "./libs/loadBanner.js";
+
 import { gsap } from "gsap";
 
 
@@ -8,7 +10,7 @@ const h = window.innerHeight;
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000);
-camera.position.z = 5;
+camera.position.z = 3.5;
 
 const canvas = document.getElementById("globe-canvas");
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, canvas });
@@ -53,8 +55,9 @@ loadGlobe("./assets/globe.glb", (loadedGlobe) => {
   scene.add(globe);
 }, loadingManager); // 👈 pass manager to loadGlobe
 
+let banners;
+let hoverController;
 
-// Load background elements (can be created instantly)
 
 
 // ===================================================
@@ -71,26 +74,30 @@ function initScene() {
   topLight.position.set(500, 500, 500);
   scene.add(topLight);
 
+  if (globe) {
+    banners = createBanner(globe, 10);
+    hoverController = enableBannerHoverZoom(renderer, camera, banners);
+  }
+
   let goalPos = 0;
   const rate = 0.1;
 
   function animate() {
-    requestAnimationFrame(animate);
+  requestAnimationFrame(animate);
 
-    goalPos = Math.PI * scrollPosY;
+  goalPos = Math.PI * scrollPosY;
 
-    if (globe) {
-      // globe.rotation.y += globe.userData.rotationSpeed || 0.002;
-      globe.rotation.y -= (globe.rotation.y - (goalPos * 2.5)) * rate;
+  if (globe) {
+    globe.rotation.y -= (globe.rotation.y - (goalPos * 2.5)) * rate;
 
-      // const targetY = -0.5 + scrollPosY * 2.0;
-      // const targetZ = 0 - scrollPosY * 1.5;
-      // globe.position.y -= (globe.position.y - targetY) * rate;
-      // globe.position.z -= (globe.position.z - targetZ) * rate;
+    if (banners && hoverController) {
+      hoverController.handleHover();
     }
-
-    renderer.render(scene, camera);
   }
+
+  renderer.render(scene, camera);
+}
+
   animate();
 }
 
